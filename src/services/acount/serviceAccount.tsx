@@ -1,4 +1,4 @@
-const API_BASE_URL = "https://pybot-api.namixcode.cc/users/"; 
+const API_BASE_URL = "https://pybot.aleosh.online/api2/users/"; 
 
 interface UserData {
   // Ajusta los campos según tu estructura real

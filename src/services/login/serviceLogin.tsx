@@ -1,4 +1,4 @@
-const API_BASE_URL = "https://pybot-api.namixcode.cc/users/login";
+const API_BASE_URL = "https://pybot.aleosh.online/api2/users/login";
 
 interface SignInData {
   email: string;

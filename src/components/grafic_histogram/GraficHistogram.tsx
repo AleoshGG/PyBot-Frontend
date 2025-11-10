@@ -48,7 +48,7 @@ const GraficHistogram = () => {
       return
     }
 
-    fetch(`https://pybot-analisis.namixcode.cc/graphics/histogram?user_id=${userId}&days=7`)
+    fetch(`https://pybot.aleosh.online/api1/graphics/histogram?user_id=${userId}&days=7`)
       .then(res => res.json())
       .then(json => {
         const rawData: number[] = json.data.attributes.speed_data

@@ -7,7 +7,7 @@ export class WebSocketGPSRepository implements IGPSRepository {
   private callback?: (data: GPSData) => void;
 
   connect(prototypeId: string) {
-    const url = `wss://pybot-ws.namixcode.cc/ws/neo?prototype_id=${prototypeId}`;
+    const url = `wss://pybot.aleosh.online/ws/ws/neo?prototype_id=${prototypeId}`;
     this.ws = new WebSocket(url);
     this.ws.onopen = () => console.log("WS conectado");
     this.ws.onmessage = (event) => {

@@ -25,7 +25,7 @@ const GpsMap: React.FC = () => {
   };
 
   useEffect(() => {
-    gpsService.execute("1234aleo", setData);
+    gpsService.execute(localStorage.getItem("selectedPrototypeId") || "", setData);
     return () => gpsService.stop();
   }, []);
 

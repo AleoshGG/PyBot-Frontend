@@ -45,7 +45,7 @@ const BarChart = () => {
     const userId = decoded?.sub
     if (!userId) return
 
-    fetch(`https://pybot-analisis.namixcode.cc/graphics/barras/${userId}`, {
+    fetch(`https://pybot.aleosh.online/api1/graphics/barras/${userId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

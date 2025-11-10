@@ -6,6 +6,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js'
+import { getUserIdFromToken } from '../auth/authUtils'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
@@ -23,7 +24,14 @@ const GraficRing = () => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch('https://pybot-analisis.namixcode.cc/graphics/anillo?user_id=17&days=30')
+    const userId = getUserIdFromToken()
+    if (!userId) {
+      console.error('No se pudo obtener el user_id del token.')
+      setLoading(false)
+      return
+    }
+
+    fetch(`https://pybot.aleosh.online/api1/graphics/anillo?user_id=${userId}&days=30`)
       .then(res => res.json())
       .then(json => {
         const periods: PeriodItem[] = json.data.attributes.periods

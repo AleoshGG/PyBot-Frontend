@@ -7,7 +7,7 @@ export class WebSocketCameraRepository implements ICameraRepository {
     private callback?: ((data: CamData) => void) | null = null;
 
     connect(prototypeId: string) {
-        const url = `wss://pybot-ws.namixcode.cc/ws/cam?prototype_id=${prototypeId}`
+        const url = `wss://pybot.aleosh.online/ws/ws/cam?prototype_id=${prototypeId}`
         this.ws = new WebSocket(url)
     
         this.ws.onopen = () => console.log("WS de Camara CONECTADO");

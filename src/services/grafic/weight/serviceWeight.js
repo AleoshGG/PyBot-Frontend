@@ -1,5 +1,6 @@
 export function serviceWeight(onData) {
-  const socket = new WebSocket('wss://pybot-ws.namixcode.cc/ws/hx?prototype_id=1234aleo');
+  prototypeId = localStorage.getItem("selectedPrototypeId") || "1234aleo";
+  const socket = new WebSocket(`wss://pybot.aleosh.online/ws/ws/hx?prototype_id=${prototypeId}`);
 
   socket.onmessage = (event) => {
     try {

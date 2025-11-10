@@ -5,7 +5,7 @@ export interface Prototype {
   user_id: string;
 }
 
-const BASE_URL = 'https://pybot-api.namixcode.cc/prototypes/';
+const BASE_URL = 'https://pybot.aleosh.online/api2/prototypes/';
 
 function getHeaders() {
   const token = localStorage.getItem('token');

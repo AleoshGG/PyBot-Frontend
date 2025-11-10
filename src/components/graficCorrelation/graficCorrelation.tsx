@@ -32,7 +32,7 @@ const CorrelationChart = () => {
     const userId = decoded?.sub
     if (!userId) return
 
-    fetch(`https://pybot-analisis.namixcode.cc/graphics/correlacion/${userId}`, {
+    fetch(`https://pybot.aleosh.online/api1/graphics/correlacion/${userId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

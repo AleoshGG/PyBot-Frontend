@@ -41,7 +41,7 @@ const GraficOgive = () => {
       return
     }
 
-    fetch(`https://pybot-analisis.namixcode.cc/graphics/probabilidad/${userId}`, {
+    fetch(`https://pybot.aleosh.online/api1/graphics/probabilidad/${userId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

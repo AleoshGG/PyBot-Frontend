@@ -4,7 +4,7 @@ export function serviceChangeUser(
   onSuccess: (data: any) => void,
   onError: (error: string) => void
 ) {
-  fetch(`https://pybot-api.namixcode.cc/users/new_username/${encodeURIComponent(newFirstName)}`, {
+  fetch(`https://pybot.aleosh.online/api2/users/new_username/${encodeURIComponent(newFirstName)}`, {
     method: 'PATCH',
     headers: {
       'Authorization': `Bearer ${token}`,

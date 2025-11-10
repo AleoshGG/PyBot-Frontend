@@ -12,7 +12,7 @@ const CameraView: React.FC = () => {
   const toggleDarkMode = () => setDarkMode((prev) => !prev);
 
   useEffect(() => {
-    cameraService.execute("1234aleo", (data: CamData) => {
+    cameraService.execute(localStorage.getItem("selectedPrototypeId") || "", (data: CamData) => {
       const base64Image = data.image.startsWith("data:image")
         ? data.image
         : `data:image/jpeg;base64,${data.image}`;

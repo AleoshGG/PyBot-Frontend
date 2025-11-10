@@ -31,7 +31,7 @@ export default function Profile() {
     const token = localStorage.getItem('token');
     if (!token) return;
 
-    fetch('https://pybot-api.namixcode.cc/users/', {
+    fetch('https://pybot.aleosh.online/api2/users/', {
       headers: {
         Authorization: `Bearer ${token}`,
       },

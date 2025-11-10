@@ -7,6 +7,7 @@ import {
   Tooltip,
   Legend
 } from 'chart.js'
+import { getUserIdFromToken } from '../auth/authUtils'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
@@ -17,11 +18,19 @@ interface DistributionItem {
 }
 
 const GraficCake = () => {
+  
   const [chartData, setChartData] = useState<any>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch('https://pybot-analisis.namixcode.cc/graphics/pastel?user_id=14')
+    const userId = getUserIdFromToken()
+    if (!userId) {
+      console.error('No se pudo obtener el user_id del token.')
+      setLoading(false)
+      return
+    }
+
+    fetch(`https://pybot.aleosh.online/api1/graphics/pastel?user_id=${userId}`)
       .then(res => res.json())
       .then(json => {
         const distribution: DistributionItem[] = json.data.attributes.distribution
