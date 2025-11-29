@@ -56,7 +56,7 @@ function App() {
         element={
           <ProtectedRoute>
             <GpsMap />
-          </ProtectedRoute>
+          </ProtectedRoute>   
         }
       />
     </Routes>

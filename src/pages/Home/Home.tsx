@@ -46,16 +46,16 @@ export default function Home() {
       <nav className="flex flex-wrap items-center justify-between mb-12 gap-y-4">
         <div className="text-teal-600 font-bold text-xl cursor-pointer">PyBot</div>
         <ul className="flex flex-wrap gap-x-6 text-base sm:text-lg font-semibold">
-          <li className="cursor-pointer hover:text-teal-600 transition" onClick={() => scrollToSection('home')}>Home</li>
-          <li className="cursor-pointer hover:text-teal-600 transition" onClick={() => scrollToSection('about-us')}>About us</li>
-          <li className="cursor-pointer hover:text-teal-600 transition" onClick={() => scrollToSection('services')}>Services</li>
-          <li className="cursor-pointer hover:text-teal-600 transition" onClick={() => scrollToSection('contact-us')}>Contact us</li>
+          <li className="cursor-pointer hover:text-teal-600 transition" onClick={() => scrollToSection('home')}>Hogar</li>
+          <li className="cursor-pointer hover:text-teal-600 transition" onClick={() => scrollToSection('about-us')}>Sobre nosotros</li>
+          <li className="cursor-pointer hover:text-teal-600 transition" onClick={() => scrollToSection('services')}>Servicios</li>
+          <li className="cursor-pointer hover:text-teal-600 transition" onClick={() => scrollToSection('contact-us')}>Contáctanos</li>
         </ul>
         <button
           onClick={handleSignUpClick}
           className="bg-teal-600 text-white px-4 sm:px-5 py-2 rounded-full hover:bg-teal-700 transition"
         >
-          Sign Up
+          Inscribirse
         </button>
       </nav>
 
@@ -68,20 +68,19 @@ export default function Home() {
           transition={{ duration: 1 }}
         >
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight">
-            We <span className="text-teal-600">solve</span> your cleaning
+            Nosotros <span className="text-teal-600">solucionamos</span> tu limpieza
           </h1>
           <p className="text-gray-500 leading-relaxed">
-            Don't miss out on this great opportunity and join us!
-            Let technology take care of the cleaning, while you take care of what really matters.
+            ¡No te pierdas esta gran oportunidad y únete a nosotros! Deja que la tecnología se encargue de la limpieza, mientras tú te ocupas de lo que realmente importa.
           </p>
           <button className="bg-teal-600 text-white px-6 py-3 rounded-lg hover:bg-teal-700 transition">
-            Get Started
+            Empezar
           </button>
           <div className="flex items-center justify-center md:justify-start space-x-3 cursor-pointer select-none">
             <div className="p-1 bg-white rounded-full shadow-md">
               <FaHeart className="text-red-500" />
             </div>
-            <span className="font-semibold">Start now</span>
+            <span className="font-semibold">Empieza ahora</span>
           </div>
         </motion.div>
 
@@ -105,10 +104,10 @@ export default function Home() {
         transition={{ duration: 1 }}
       >
         <h2 className="text-xl font-semibold">
-          We Provide the best <span className="text-teal-600">services</span>
+          Brindamos los mejores <span className="text-teal-600">servicios</span>
         </h2>
         <p className="text-gray-500 mt-2">
-          Enter your personal details and start with us.
+          Introduce tus datos personales y empieza con nosotros.
         </p>
       </motion.footer>
 
@@ -122,26 +121,26 @@ export default function Home() {
 >
   <div className="bg-white shadow-md p-6 rounded-md">
     <div className="w-8 h-4 bg-yellow-400 rounded-md mb-4" />
-    <h3 className="font-bold text-lg mb-2">Sale of cleaning robots</h3>
-    <p className="text-gray-500 text-sm">Models adapted to different spaces, budgets and needs.</p>
+    <h3 className="font-bold text-lg mb-2">Venta de robots de limpieza</h3>
+    <p className="text-gray-500 text-sm">Modelos adaptados a diferentes espacios, presupuestos y necesidades.</p>
   </div>
 
   <div className="bg-white shadow-md p-6 rounded-md">
     <div className="w-8 h-4 bg-green-500 rounded-md mb-4" />
-    <h3 className="font-bold text-lg mb-2">Software updates</h3>
-    <p className="text-gray-500 text-sm">We keep your robot always up to date with the latest in smart technology.</p>
+    <h3 className="font-bold text-lg mb-2">Actualizaciones de software</h3>
+    <p className="text-gray-500 text-sm">Mantenemos tu robot siempre actualizado con lo último en tecnología inteligente.</p>
   </div>
 
   <div className="bg-white shadow-md p-6 rounded-md">
     <div className="w-8 h-4 bg-purple-600 rounded-md mb-4" />
-    <h3 className="font-bold text-lg mb-2">Installation and training</h3>
-    <p className="text-gray-500 text-sm">We take care of leaving your equipment ready and operational.</p>
+    <h3 className="font-bold text-lg mb-2">Instalación y formación</h3>
+    <p className="text-gray-500 text-sm">Nos encargamos de dejar tu equipo listo y operativo.</p>
   </div>
 
   <div className="bg-white shadow-md p-6 rounded-md">
     <div className="w-8 h-4 bg-red-600 rounded-md mb-4" />
-    <h3 className="font-bold text-lg mb-2">Others</h3>
-    <p className="text-gray-500 text-sm">Software and hardware review.</p>
+    <h3 className="font-bold text-lg mb-2">Otros</h3>
+    <p className="text-gray-500 text-sm">Revisión de software y hardware.</p>
   </div>
 </motion.div>
 
@@ -158,11 +157,11 @@ export default function Home() {
           </div>
           <div className="w-full lg:w-1/2 space-y-5">
   <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-700">
-    <span className="text-gray-800">Simple</span>{' '}
-    <span className="text-teal-600">Solutions!</span>
+    <span className="text-gray-800">Soluciones</span>{' '}
+    <span className="text-teal-600">Sencillas!</span>
   </h2>
   <p className="text-gray-700">
-    Enter your personal details and start journey with us.
+    Introduce tus datos personales y comienza tu viaje con nosotros.
   </p>
 
   <div className="flex items-start space-x-4">
@@ -170,8 +169,8 @@ export default function Home() {
       1
     </div>
     <div>
-      <h4 className="font-semibold text-gray-800">Create an account</h4>
-      <p className="text-sm text-gray-600">Fill in your personal information to begin.</p>
+      <h4 className="font-semibold text-gray-800">Crear una cuenta</h4>
+      <p className="text-sm text-gray-600">Complete su información personal para comenzar.</p>
     </div>
   </div>
 
@@ -180,8 +179,8 @@ export default function Home() {
       2
     </div>
     <div>
-      <h4 className="font-semibold text-gray-800">navigat</h4>
-      <p className="text-sm text-gray-600">visualize the different options you have.</p>
+      <h4 className="font-semibold text-gray-800">Navegar</h4>
+      <p className="text-sm text-gray-600">Visualiza las diferentes opciones que tienes.</p>
     </div>
   </div>
 
@@ -190,8 +189,8 @@ export default function Home() {
       3
     </div>
     <div>
-      <h4 className="font-semibold text-gray-800">see your graphs</h4>
-      <p className="text-sm text-gray-600">check your different graphs.</p>
+      <h4 className="font-semibold text-gray-800">mira tus gráficos</h4>
+      <p className="text-sm text-gray-600">Revisa tus diferentes gráficos.</p>
     </div>
   </div>
 
@@ -200,17 +199,17 @@ export default function Home() {
       4
     </div>
     <div>
-      <h4 className="font-semibold text-gray-800">Enjoy the benefits</h4>
-      <p className="text-sm text-gray-600">Access exclusive features and offers.</p>
+      <h4 className="font-semibold text-gray-800">Disfruta de los beneficios</h4>
+      <p className="text-sm text-gray-600">Accede a funciones y ofertas exclusivas.</p>
     </div>
   </div>
 
   <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0 mt-6">
     <button className="bg-teal-600 text-white px-6 py-2 rounded-md hover:bg-teal-700">
-      Get Started
+      Empezar
     </button>
     <button className="border border-teal-600 text-teal-600 px-6 py-2 rounded-md hover:bg-teal-50">
-      Get Started
+      Empezar
     </button>
   </div>
 </div>
@@ -229,13 +228,13 @@ export default function Home() {
         <div className="flex flex-col lg:flex-row items-center justify-between mb-20 space-y-10 lg:space-y-0">
           <div className="lg:w-1/2 space-y-6 text-center lg:text-left">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-800">
-              Our <span className="text-teal-600">Agency</span>
+              Nuestra <span className="text-teal-600">Agencia</span>
             </h2>
             <p className="text-gray-600">
-              We seek to make home cleaning easier and at the same time make a big change.
+              Buscamos hacer más fácil la limpieza del hogar y al mismo tiempo generar un gran cambio.
             </p>
             <button className="bg-teal-600 text-white px-6 py-3 rounded-md hover:bg-teal-700">
-              Get Started
+              Empezar
             </button>
           </div>
           <div className="lg:w-1/2 flex justify-center">
@@ -250,7 +249,7 @@ export default function Home() {
             animate={clientsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 60 }}
             transition={{ duration: 1 }}
           >
-            What <span className="text-teal-600">Clients</span> Say!
+            Lo que dicen <span className="text-teal-600">Nuestros</span> clientes!
           </motion.h2>
           <motion.p
             className="text-gray-600 mt-2"
@@ -258,7 +257,7 @@ export default function Home() {
             animate={clientsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 60 }}
             transition={{ duration: 1, delay: 0.2 }}
           >
-            Enter your personal details and start journey with us.
+            Introduce tus datos personales y comienza tu viaje con nosotros.
           </motion.p>
         </div>
 

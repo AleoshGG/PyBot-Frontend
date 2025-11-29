@@ -8,9 +8,10 @@ import {
   LineElement,
   Tooltip,
   Legend,
+  Title,
 } from 'chart.js'
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend)
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend, Title)
 
 const decodeJWT = (token: string) => {
   try {
@@ -27,7 +28,26 @@ const WorkPeriodSuccessProbability = () => {
   const [chartData, setChartData] = useState<any>(null)
   const [loading, setLoading] = useState(true)
   const [probability, setProbability] = useState<number | null>(null)
-  const fixedWeight = 0.15 // 150 gramos en kg
+
+  // MODO OSCURO sincronizado con localStorage
+  const [darkMode, setDarkMode] = useState(
+    () => localStorage.getItem("darkMode") === "true"
+  )
+
+  // Actualización automática cuando el menú cambia darkMode
+  useEffect(() => {
+    const handleStorage = () => {
+      const mode = localStorage.getItem("darkMode") === "true"
+      setDarkMode(mode)
+    }
+
+    window.addEventListener("storage", handleStorage)
+    return () => window.removeEventListener("storage", handleStorage)
+  }, [])
+
+
+  // ---- FETCH Y GRÁFICA ----------------------------------------------------------
+  const fixedWeight = 0.15
 
   useEffect(() => {
     const token = localStorage.getItem('token')
@@ -43,7 +63,7 @@ const WorkPeriodSuccessProbability = () => {
       return
     }
 
-    fetch(`https://pybot.aleosh.online/api1/graphics/probabilidad/${userId}`, {
+    fetch(`https://pybot.aleosh.online/api1/graphics/ojiva`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -57,7 +77,6 @@ const WorkPeriodSuccessProbability = () => {
           return
         }
 
-        // Ordenar por peso promedio
         dataPoints.sort((a: any, b: any) => a.avg_weight - b.avg_weight)
 
         const total = dataPoints.length
@@ -65,12 +84,10 @@ const WorkPeriodSuccessProbability = () => {
         const weights: number[] = []
         const probabilities: number[] = []
 
-        // Convertir gramos a kilogramos y llenar pesos
         for (const p of dataPoints) {
           weights.push(p.avg_weight / 1000)
         }
 
-        // Calcular probabilidades acumuladas
         for (let i = 0; i < dataPoints.length; i++) {
           cumulativeCount += 1
           probabilities.push(cumulativeCount / total)
@@ -82,25 +99,21 @@ const WorkPeriodSuccessProbability = () => {
             {
               label: 'Probabilidad acumulada de éxito (peso promedio)',
               data: probabilities,
-              borderColor: '#6366f1',
-              backgroundColor: '#a5b4fc',
+              borderColor: darkMode ? '#60a5fa' : '#6366f1',
+              backgroundColor: darkMode ? '#93c5fd' : '#a5b4fc',
               fill: false,
               tension: 0.3,
             },
           ],
         })
 
-        // Calcular probabilidad acumulada para peso ≤ fixedWeight (0.15 kg)
         let prob = 0
         for (let i = 0; i < weights.length; i++) {
-          if (weights[i] <= fixedWeight) {
-            prob = probabilities[i]
-          } else {
-            break
-          }
+          if (weights[i] <= fixedWeight) prob = probabilities[i]
+          else break
         }
-        setProbability(prob)
 
+        setProbability(prob)
         setLoading(false)
       })
       .catch(error => {
@@ -108,16 +121,27 @@ const WorkPeriodSuccessProbability = () => {
         setChartData(null)
         setLoading(false)
       })
-  }, [])
+  }, [darkMode])
 
+
+  // ---- UI -----------------------------------------------------------------------
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white rounded-xl shadow-md mt-8 h-120">
+    <div
+      className={`max-w-3xl mx-auto p-6 rounded-xl shadow-md mt-8 h-120 transition-colors duration-300
+        ${darkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'}
+      `}
+    >
       <p className="mt-6 text-center text-lg font-medium">
-        La probabilidad acumulada de tener un período de trabajo exitoso con peso promedio menor o igual a <strong>150 gramos</strong> es:{' '}
-        <strong>{(probability !== null ? (probability * 100).toFixed(2) : '0')}%</strong>
+        La probabilidad acumulada de tener un período de trabajo exitoso con peso promedio menor o igual a{' '}
+        <strong>150 gramos</strong> es:{' '}
+        <strong>{probability !== null ? (probability * 100).toFixed(2) : '0'}%</strong>
       </p>
 
-      {loading && <p className="text-center text-gray-500">Cargando datos...</p>}
+      {loading && (
+        <p className={`text-center ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+          Cargando datos...
+        </p>
+      )}
 
       {chartData && (
         <Line
@@ -125,25 +149,45 @@ const WorkPeriodSuccessProbability = () => {
           options={{
             responsive: true,
             plugins: {
-              legend: { display: true, position: 'bottom' },
+              legend: {
+                display: true,
+                position: 'bottom',
+                labels: { color: darkMode ? '#fff' : '#000' },
+              },
+              tooltip: {
+                titleColor: darkMode ? '#fff' : '#000',
+                bodyColor: darkMode ? '#fff' : '#000',
+                backgroundColor: darkMode ? '#333' : '#fff',
+              },
               title: {
                 display: true,
                 text: 'Función de Probabilidad Acumulada de Peso Promedio',
+                color: darkMode ? '#fff' : '#000',
               },
             },
             scales: {
               y: {
                 beginAtZero: true,
                 max: 1,
+                ticks: { color: darkMode ? '#fff' : '#000' },
+                grid: {
+                  color: darkMode ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.1)',
+                },
                 title: {
                   display: true,
                   text: 'Probabilidad acumulada',
+                  color: darkMode ? '#fff' : '#000',
                 },
               },
               x: {
+                ticks: { color: darkMode ? '#fff' : '#000' },
+                grid: {
+                  color: darkMode ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.1)',
+                },
                 title: {
                   display: true,
                   text: 'Peso Promedio (kg)',
+                  color: darkMode ? '#fff' : '#000',
                 },
               },
             },
@@ -152,7 +196,9 @@ const WorkPeriodSuccessProbability = () => {
       )}
 
       {!loading && !chartData && (
-        <p className="text-center text-gray-500">No hay datos disponibles para mostrar.</p>
+        <p className={`text-center ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+          No hay datos disponibles para mostrar.
+        </p>
       )}
     </div>
   )
