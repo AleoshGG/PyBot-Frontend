@@ -10,7 +10,15 @@ const MySwal = withReactContent(Swal)
 export default function Init() {
   const [cards, setCards] = useState<Prototype[]>([])
   const [loading, setLoading] = useState(true)
-  const [darkMode, setDarkMode] = useState(false) // estado para modo oscuro
+
+  const [darkMode, setDarkMode] = useState(() => {
+    return localStorage.getItem("darkMode") === "true"
+  })
+
+  useEffect(() => {
+    localStorage.setItem("darkMode", String(darkMode))
+  }, [darkMode])
+
 
   useEffect(() => {
     async function fetchPrototypes() {
@@ -100,93 +108,64 @@ export default function Init() {
   }
 
   return (
-  <div className={`flex min-h-screen relative ${darkMode ? 'bg-gray-900 text-white' : 'bg-[#fefdf6] text-black'}`}>
-    <div className="flex-1 p-10">
-      <h1 className="text-3xl font-bold text-teal-600 mb-8">Welcome to PyBot</h1>
+    <div className={`flex min-h-screen relative ${darkMode ? 'bg-gray-900 text-white' : 'bg-[#fefdf6] text-black'}`}>
+      <div className="flex-1 p-10">
+        <h1 className="text-3xl font-bold text-teal-600 mb-8">Welcome to PyBot</h1>
 
-      {cards.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          {cards.map(({ prototype_id, prototype_name }) => (
-            <Card key={prototype_id} id={prototype_id} name={prototype_name} />
-          ))}
-        </div>
-      ) : (
-        <p className="text-gray-600 text-center">No hay prototipos para mostrar.</p>
-      )}
-    </div>
-
-    {/* Contenedor fijo para los botones alineados verticalmente */}
-    <div className="fixed bottom-6 right-6 flex flex-col gap-4 z-50">
-      {/* Botón para agregar dispositivo */}
-      <button
-        onClick={handleAddCard}
-        className="bg-teal-500 text-white p-4 rounded-full shadow-lg hover:bg-teal-600"
-        title="Agregar nuevo dispositivo"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-5 w-5"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={2}
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-        </svg>
-      </button>
-
-      {/* Botón para modo oscuro */}
-      <button
-        onClick={toggleDarkMode}
-        className="bg-gray-700 text-white p-3 rounded-full shadow-lg hover:bg-gray-800"
-        title="Activar/Desactivar modo oscuro"
-      >
-        {darkMode ? (
-          // icono sol para modo claro
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m8.66-10.66l-.7.7m-13.59 0l-.7-.7M21 12h-1M4 12H3m16.66 6.66l-.7-.7m-13.59 0l-.7.7M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-          </svg>
+        {cards.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+            {cards.map(({ prototype_id, prototype_name }) => (
+              <Card key={prototype_id} id={prototype_id} name={prototype_name} />
+            ))}
+          </div>
         ) : (
-          // icono luna para modo oscuro
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z" />
-          </svg>
+          <p className="text-gray-600 text-center">No hay prototipos para mostrar.</p>
         )}
-      </button>
+      </div>
 
-      {/* Botón para salir */}
-      <button
-        onClick={handleLogout}
-        className="bg-red-600 text-white p-3 rounded-full shadow-lg hover:bg-red-700"
-        title="Salir"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={2}
+      {/* Contenedor fijo para los botones */}
+      <div className="fixed bottom-6 right-6 flex flex-col gap-4 z-50">
+
+        {/* Botón para agregar dispositivo */}
+        <button
+          onClick={handleAddCard}
+          className="bg-teal-500 text-white p-4 rounded-full shadow-lg hover:bg-teal-600"
+          title="Agregar nuevo dispositivo"
         >
-          <path strokeLinecap="round" strokeLinejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7" />
-          <path strokeLinecap="round" strokeLinejoin="round" d="M7 8v8" />
-        </svg>
-      </button>
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+          </svg>
+        </button>
+
+        {/* Botón modo oscuro */}
+        <button
+          onClick={toggleDarkMode}
+          className="bg-gray-700 text-white p-3 rounded-full shadow-lg hover:bg-gray-800"
+          title="Activar/Desactivar modo oscuro"
+        >
+          {darkMode ? (
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m8.66-10.66l-.7.7m-13.59 0l-.7-.7M21 12h-1M4 12H3m16.66 6.66l-.7-.7m-13.59 0l-.7.7M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+          ) : (
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z" />
+            </svg>
+          )}
+        </button>
+
+        {/* Botón salir */}
+        <button
+          onClick={handleLogout}
+          className="bg-red-600 text-white p-3 rounded-full shadow-lg hover:bg-red-700"
+          title="Salir"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7" />
+            <path strokeLinecap="round" strokeLinejoin="round" d="M7 8v8" />
+          </svg>
+        </button>
+      </div>
     </div>
-  </div>
-)
+  )
 }
